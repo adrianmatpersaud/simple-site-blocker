@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "Studying",
+  "version": "0.0.1",
+  "browser_action": {
+    "default_icon": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
