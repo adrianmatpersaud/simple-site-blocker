@@ -1,14 +1,13 @@
-let sites = ["reddit",
-	     "youtube",
-	     "bbc",
-	     "facebook",
-	     "aljazeera",
-	     "instagram"]
-             .map(domain => "www." + domain + ".com");
+chrome.storage.local.get(["blockStore"]).then((result) => {
+    ;
+    const blockList = [...result.blockStore, ...result.blockStore.map(domain => "www." + domain)];
 
-let bad_url = window.location.hostname;
+    const currentUrl = window.location.hostname;
 
-let blocked = (sites.map(url => url.includes(bad_url)))
-                    .reduce((acc, cur) => {return acc || cur;}, false);
+    let isBlocked = (blockList.map(url => url.includes(currentUrl)))
+                              .reduce((acc, cur) => {return acc || cur;}, false);
 
-if(blocked) window.location.href = "https://media.tenor.com/EIOYrYnPOq8AAAAd/seal-spin.gif";
+    if(isBlocked) {
+        window.location.href = "https://media.tenor.com/EIOYrYnPOq8AAAAd/seal-spin.gif";
+    }
+});
